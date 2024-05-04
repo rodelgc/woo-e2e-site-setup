@@ -37,6 +37,8 @@ curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugi
 curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/process-waiting-actions.php >"$MU_PLUGINS_PATH/process-waiting-actions.php"
 curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/test-helper-apis.php >"$MU_PLUGINS_PATH/test-helper-apis.php"
 curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/wp-cache-flush.php >"$MU_PLUGINS_PATH/wp-cache-flush.php"
+echo "Listing currently installed mu-plugins..."
+wp plugin list --status=must-use
 
 printf "\n\n\n"
 
