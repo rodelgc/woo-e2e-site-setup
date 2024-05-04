@@ -2,6 +2,11 @@
 
 clear
 
+if [[ -z "$MU_PLUGINS_PATH" ]]; then
+    echo "MU_PLUGINS_PATH variable was not set."
+    exit 1
+fi
+
 echo "--------------------------------------------------------"
 echo -e "Installing plugins from .wp-env.json"
 echo "--------------------------------------------------------"
@@ -28,10 +33,10 @@ printf "\n\n\n"
 echo "--------------------------------------------------------"
 echo -e "Installing mu plugins"
 echo "--------------------------------------------------------"
-wp plugin install --activate https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/filter-setter.zip \
-    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/process-waiting-actions.zip \
-    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/test-helper-apis.zip \
-    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/wp-cache-flush.zip
+curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/filter-setter.php >"$MU_PLUGINS_PATH/filter-setter.php"
+curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/process-waiting-actions.php >"$MU_PLUGINS_PATH/process-waiting-actions.php"
+curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/test-helper-apis.php >"$MU_PLUGINS_PATH/test-helper-apis.php"
+curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/wp-cache-flush.php >"$MU_PLUGINS_PATH/wp-cache-flush.php"
 
 printf "\n\n\n"
 
