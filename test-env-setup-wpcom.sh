@@ -12,7 +12,10 @@ echo -e "Update URL structure\n"
 wp rewrite structure '/%postname%/' --hard
 
 echo -e "Installing mu plugins\n"
-# TODO
+wp plugin install --activate https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/filter-setter.php \
+    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/process-waiting-actions.php \
+    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/test-helper-apis.php \
+    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/wp-cache-flush.php
 
 echo -e 'Add Customer user \n'
 wp user create customer customer@woocommercecoree2etestsuite.com \
@@ -29,4 +32,6 @@ echo -e 'Enable tracking\n'
 wp option update woocommerce_allow_tracking 'yes'
 
 echo -e 'Upload test images \n'
-#  TODO
+wp media import https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-01.png \
+    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-02.png \
+    https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-03.png
