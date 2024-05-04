@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+clear
+
 echo "--------------------------------------------------------"
 echo -e "Installing plugins from .wp-env.json"
 echo "--------------------------------------------------------"
