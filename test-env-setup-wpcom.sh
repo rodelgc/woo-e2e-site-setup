@@ -65,7 +65,12 @@ echo "--------------------------------------------------------"
 echo -e 'Upload test images'
 echo "--------------------------------------------------------"
 echo "Deleting all media files first..."
-wp post delete --force $(wp post list --post_type='attachment' --format=ids)
+MEDIA_IDS="$(wp post list --post_type='attachment' --format=ids)"
+if [ "$MEDIA_IDS" ]; then
+    wp post delete --force $MEDIA_IDS
+else
+    echo "Media library empty, nothing to delete."
+fi
 
 echo "Importing test images..."
 wp media import https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-01.png \
