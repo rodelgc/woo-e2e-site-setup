@@ -2,11 +2,6 @@
 
 clear
 
-if [[ -z "$MU_PLUGINS_PATH" ]]; then
-    echo "MU_PLUGINS_PATH variable was not set."
-    exit 1
-fi
-
 echo "--------------------------------------------------------"
 echo -e "Installing plugins from .wp-env.json"
 echo "--------------------------------------------------------"
@@ -33,12 +28,10 @@ printf "\n\n\n"
 echo "--------------------------------------------------------"
 echo -e "Installing mu plugins"
 echo "--------------------------------------------------------"
-curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/filter-setter.php >"$MU_PLUGINS_PATH/filter-setter.php"
-curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/process-waiting-actions.php >"$MU_PLUGINS_PATH/process-waiting-actions.php"
-curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/test-helper-apis.php >"$MU_PLUGINS_PATH/test-helper-apis.php"
-curl https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/mu-plugins/wp-cache-flush.php >"$MU_PLUGINS_PATH/wp-cache-flush.php"
-echo "Listing currently installed mu-plugins..."
-wp plugin list --status=must-use
+wp plugin install --force --activate https://github.com/rodelgc/woo-e2e-site-setup/raw/trunk/mu-plugins/filter-setter.zip \
+    https://github.com/rodelgc/woo-e2e-site-setup/raw/trunk/mu-plugins/process-waiting-actions.zip \
+    https://github.com/rodelgc/woo-e2e-site-setup/raw/trunk/mu-plugins/test-helper-apis.zip \
+    https://github.com/rodelgc/woo-e2e-site-setup/raw/trunk/mu-plugins/wp-cache-flush.zip
 
 printf "\n\n\n"
 
@@ -71,6 +64,10 @@ printf "\n\n\n"
 echo "--------------------------------------------------------"
 echo -e 'Upload test images'
 echo "--------------------------------------------------------"
+echo "Deleting all media files first..."
+wp post delete --force $(wp post list --post_type='attachment' --format=ids)
+
+echo "Importing test images..."
 wp media import https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-01.png \
     https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-02.png \
     https://raw.githubusercontent.com/rodelgc/woo-e2e-site-setup/trunk/images/image-03.png
